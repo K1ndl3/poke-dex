@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { getFullPokedexNumber, getPokedexNumber,  } from "../utils";
+import { TypeCard } from "./TypeCard";
+
 
 export function PokeCard(props) {
 
@@ -8,6 +10,14 @@ export function PokeCard(props) {
     const [loading, setLoading] = useState(false);
 
     const {name, height, abilities, stats, types, moves, sprites} = data || {};
+
+    const imgList = Object.keys(sprites || {}).filter(val => {
+        if (!sprites[val]) return false;
+
+        if (['version','other'].includes(val)) return false;
+
+        return true;
+    })
     useEffect(() => {
         // if loading, exit logic
         if (loading || !localStorage) return;
@@ -61,8 +71,26 @@ export function PokeCard(props) {
         )
     }
 
-    return (<div className="poke-card">
-        <h4>#{getFullPokedexNumber(selectedPokemon)}</h4>
-        <h2>{name}</h2>
-    </div>)
+    return (
+    <div className="poke-card">
+        <div>
+            <h4>#{getFullPokedexNumber(selectedPokemon)}</h4>
+            <h2>{name}</h2>
+        </div>
+        <div className="type-container">
+            {types.map((typeObj, typeIndex) => {
+                return (<TypeCard key={typeIndex} type={typeObj?.type?.name}></TypeCard>)
+            })}
+        </div>
+        <img src={'/pokemon/' + getFullPokedexNumber(selectedPokemon) + '.png'} alt={`Image of: ${name}`} className="default-img" />
+        <div className="image-container">
+            {imgList.map((sprite, spriteKey) => {
+                const imgUrl = sprites[sprite]
+                return (
+                    <img key={spriteKey} src={imgUrl} alt={`${name}-img-${sprite}`}></img>
+                )
+            })}
+        </div>
+    </div>
+    )
 }
