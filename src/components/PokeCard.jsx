@@ -91,6 +91,30 @@ export function PokeCard(props) {
                 )
             })}
         </div>
+        <h3>Stats</h3>
+        <div className="stats-card">
+            {stats.map((statObj, statIndex) => {
+                const { stat, base_stat } = statObj;
+                return (
+                    <div key={statIndex} className="stat-item">
+                        <p>{stat?.name}</p>
+                        <h4>{base_stat}</h4>
+                    </div>
+                )
+            })}
+        </div>
+        <h3>Moves</h3>
+        <div className="move-card">
+            {moves.map((moveObj, moveIndex) => {
+                const { move } = moveObj;
+                return (
+                    <div className="move-name" key={moveIndex}>
+                        <p>{move?.name}</p>
+                        <p>{move?.url}</p>
+                    </div>
+                )
+            })}
+        </div>
     </div>
     )
 }
