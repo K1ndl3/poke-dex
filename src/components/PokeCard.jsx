@@ -104,14 +104,13 @@ export function PokeCard(props) {
             })}
         </div>
         <h3>Moves</h3>
-        <div className="move-card">
+        <div className="pokemon-move-grid">
             {moves.map((moveObj, moveIndex) => {
                 const { move } = moveObj;
                 return (
-                    <div className="move-name" key={moveIndex}>
+                    <button className="button-card pokemon-move" onClick={() => {}}>
                         <p>{move?.name}</p>
-                        <p>{move?.url}</p>
-                    </div>
+                        </button>
                 )
             })}
         </div>
