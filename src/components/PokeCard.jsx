@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import { getFullPokedexNumber, getPokedexNumber,  } from "../utils";
 import { TypeCard } from "./TypeCard";
-
+import { Modal } from "./Modal";
 
 export function PokeCard(props) {
 
     const {selectedPokemon} = props
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [skill, setSKill] = useState(null);
 
     const {name, height, abilities, stats, types, moves, sprites} = data || {};
 
@@ -73,6 +74,17 @@ export function PokeCard(props) {
 
     return (
     <div className="poke-card">
+        <Modal>
+            <div>
+                <h6>Name</h6>
+                <h2></h2>
+            </div>
+            <div>
+                <h6>Description</h6>
+                <p>asdfasdf</p>
+            </div>
+        </Modal>
+        
         <div>
             <h4>#{getFullPokedexNumber(selectedPokemon)}</h4>
             <h2>{name}</h2>
